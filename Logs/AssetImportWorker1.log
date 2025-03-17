@@ -2690,3 +2690,11 @@ Memory consumption went from 76.7 MB to 76.0 MB.
 Total: 4.764227 ms (FindLiveObjects: 0.285082 ms CreateObjectMapping: 0.123666 ms MarkObjects: 3.825429 ms  DeleteObjects: 0.529381 ms)
 
 Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Import Request.
+  Time since last request: 20311.493753 seconds.
+  path: Assets/PlayerMat.mat
+  artifactKey: Guid(3342973df191f8f6ba4aee1e99f95ec4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/PlayerMat.mat using Guid(3342973df191f8f6ba4aee1e99f95ec4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '119ace003137b02418df64e828bf492c') in 0.295091316 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+

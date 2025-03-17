@@ -2730,3 +2730,67 @@ Memory consumption went from 79.7 MB to 78.8 MB.
 Total: 5.450721 ms (FindLiveObjects: 0.309420 ms CreateObjectMapping: 0.174366 ms MarkObjects: 4.311274 ms  DeleteObjects: 0.654888 ms)
 
 Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Import Request.
+  Time since last request: 15786.974212 seconds.
+  path: Assets/New Material.mat
+  artifactKey: Guid(38a60334bbe74e234bcdec8cfed2073d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/New Material.mat using Guid(38a60334bbe74e234bcdec8cfed2073d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '65677b70e8be6e0605e4e290a7a0dae7') in 0.090996315 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 26.489113 seconds.
+  path: Assets/WallMaterial.mat
+  artifactKey: Guid(38a60334bbe74e234bcdec8cfed2073d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/WallMaterial.mat using Guid(38a60334bbe74e234bcdec8cfed2073d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '1a6215d8ddd9e1026e161ebeaf14b88e') in 0.006504483 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 144.435529 seconds.
+  path: Assets/PreventFalling.cs
+  artifactKey: Guid(e347fcd163eb768b19948ed8e3c44848) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/PreventFalling.cs using Guid(e347fcd163eb768b19948ed8e3c44848) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'b4c6cf76abb0ba3555f012248b657b67') in 0.000472472 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 24.888087 seconds.
+  path: Assets/New Material.mat
+  artifactKey: Guid(f373862a2a607f322b515e6db10e5a44) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/New Material.mat using Guid(f373862a2a607f322b515e6db10e5a44) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '48786587bccccde6270d7451a95868a2') in 0.008264296 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 145.639576 seconds.
+  path: Assets/New Material.mat
+  artifactKey: Guid(f373862a2a607f322b515e6db10e5a44) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/New Material.mat using Guid(f373862a2a607f322b515e6db10e5a44) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '24de1829c29776815944b1e06b681d20') in 0.016038663 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000042 seconds.
+  path: Assets/WallMaterial.mat
+  artifactKey: Guid(38a60334bbe74e234bcdec8cfed2073d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/WallMaterial.mat using Guid(38a60334bbe74e234bcdec8cfed2073d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'be425f371dad10f272c46e28ae493c87') in 0.010567846 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 324.958054 seconds.
+  path: Assets/GameManager.cs
+  artifactKey: Guid(31983d859a872f0ee92187e28d801f18) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GameManager.cs using Guid(31983d859a872f0ee92187e28d801f18) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '1cf2e6ceb7a4903b801d741e0050014e') in 0.00039831 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 70.131618 seconds.
+  path: Assets/GroundMaterial.mat
+  artifactKey: Guid(f373862a2a607f322b515e6db10e5a44) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GroundMaterial.mat using Guid(f373862a2a607f322b515e6db10e5a44) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '4771faf7a7bc8b0d264fb61ae7ec2b2e') in 0.009979174 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
