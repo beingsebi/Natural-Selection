@@ -208,3 +208,11 @@ Unloading 3772 unused Assets / (1.3 MB). Loaded Objects now: 4273.
 Memory consumption went from 82.4 MB to 81.0 MB.
 Total: 9.382352 ms (FindLiveObjects: 0.372165 ms CreateObjectMapping: 0.606204 ms MarkObjects: 6.934464 ms  DeleteObjects: 1.468579 ms)
 
+========================================================================
+Received Import Request.
+  Time since last request: 6021.590165 seconds.
+  path: Assets/Darth_Artisan/Free_Trees/Prefabs/Oak_Tree.prefab
+  artifactKey: Guid(c44bd9bdc114d4a60932c0087d9d1732) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Darth_Artisan/Free_Trees/Prefabs/Oak_Tree.prefab using Guid(c44bd9bdc114d4a60932c0087d9d1732) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'b429ccf176652342ed07258e699928b6') in 0.116940061 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 9
+
