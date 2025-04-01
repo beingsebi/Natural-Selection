@@ -297,3 +297,9 @@ Memory consumption went from 97.7 MB to 96.5 MB.
 Total: 9.266255 ms (FindLiveObjects: 0.544438 ms CreateObjectMapping: 0.257496 ms MarkObjects: 7.501805 ms  DeleteObjects: 0.961107 ms)
 
 Prepare: number of updated asset objects reloaded= 0
+Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
+AssetImportWorker is now disconnected from the server
+Process exiting
+
+SDL leaked 2 allocations
+Internal: Possible leak. All render target surfaces should be removed from IdMap when destructed using RenderTargetMap::Remove(RenderSurfaceBase* rs).
