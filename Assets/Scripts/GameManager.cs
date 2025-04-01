@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    void EndGame()
+    public void EndGame()
     {
-        Debug.Log("Game Over");
+        Debug.Log("Game is quitting...");
+        Application.Quit();
     }
 }
