@@ -50,8 +50,9 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < epochs; i++)
         {
             players = simulateEpoch(players, foodPerEpoch, mutationTemp);
-            // add stats here 
+            // gather stats here 
         }
+        // display stats here 
     }
 
     private GameObject[] simulateEpoch(GameObject[] players, int foodPerEpoch, int mutationTemp)
