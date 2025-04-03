@@ -45,19 +45,31 @@ public class GameManager : MonoBehaviour
             players[i].GetComponent<Traits>().energy = energyPerEpoch;
         }
 
-        _spawnManager.assignRandomPositions(players);
 
         for (int i = 0; i < epochs; i++)
         {
+            _spawnManager.assignRandomPositions(players);
             players = simulateEpoch(players, foodPerEpoch, mutationTemp);
             // gather stats here 
         }
-        // display stats here 
+        // save stats to disk
+        // display stats 
+        // add some menu for stats 
     }
 
     private GameObject[] simulateEpoch(GameObject[] players, int foodPerEpoch, int mutationTemp)
     {
-        // simulate the epoch
+        //spawn food 
+
+        // dead = eaten by bigger player or has 0 energy
+        // active = not dead and not returned home 
+        // While (any is active) 
+            // move the players (based on sense) (if has enough energy, move towards food, else move home)
+            // eat food 
+            // eat player 
+        
+        
+        //despawn food
         return players;
     }
 }
