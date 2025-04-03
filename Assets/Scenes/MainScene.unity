@@ -14635,6 +14635,7 @@ MonoBehaviour:
   _foodPerEpochText: {fileID: 1737276549}
   _energyPerEpochText: {fileID: 1806360830}
   _spawnManager: {fileID: 448314167}
+  _playerPrefab: {fileID: 2809555370249980501, guid: c46c7cadd94808c74b2468478836bedf, type: 3}
 --- !u!4 &1317519372
 Transform:
   m_ObjectHideFlags: 0
