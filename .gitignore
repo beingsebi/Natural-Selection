@@ -1,0 +1,6 @@
+Assembly-CSharp.csproj
+.vscode\
+.sln
+.vs/
+/Library/
+Library/Style.catalog
