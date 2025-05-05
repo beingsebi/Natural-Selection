@@ -7,33 +7,29 @@ public class FoodSpawner : MonoBehaviour
     public float spawnRate = 10;
     public int floorScale = 1;
     public GameObject myPrefab;
-    public float timeElapsed = 0;
 
-    void Start()
+    public void StartSpawning(int spawnCount)
     {
-        // Spawn food at random locations at the start of the game
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < spawnCount; i++)
         {
-            SpawnFood();
-        }
-    }
-
-    // FixedUpdate is called once per physics frame
-    void FixedUpdate()
-    {
-        //spawn food every second with timeElapsed
-        timeElapsed += Time.deltaTime;
-        if (timeElapsed >= spawnRate)
-        {
-            timeElapsed = timeElapsed % spawnRate;
             SpawnFood();
         }
     }
 
     void SpawnFood()
     {
-        int x = Random.Range(-100, 101)*floorScale;
-        int z = Random.Range(-100, 101)*floorScale;
+        int x = Random.Range(-35, 35) * floorScale;
+        int z = Random.Range(-35, 35) * floorScale;
         Instantiate(myPrefab, new Vector3((float)x, 0.75f, (float)z), Quaternion.identity);
+    }
+
+    public void RemoveSpawned()
+    {
+        GameObject[] foodList = GameObject.FindGameObjectsWithTag("Food");
+        foreach (GameObject food in foodList)
+        {
+            Destroy(food);
+        }
+        Debug.Log("All food destroyed.");
     }
 }

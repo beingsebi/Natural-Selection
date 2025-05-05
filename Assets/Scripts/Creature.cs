@@ -86,67 +86,70 @@ public class Creature : MonoBehaviour
 
         // This section of code is for the new food detection system (Raycasts)
         // Set up a variable to store the number of raycasts to use
-        int numRaycasts = 5;
+        // int numRaycasts = 5;
 
-        // Set up a variable to store the angle between raycasts
-        float angleBetweenRaycasts = 30;
+        // // Set up a variable to store the angle between raycasts
+        // float angleBetweenRaycasts = 30;
 
-        // Set up an array to store the distances to the food objects detected by the raycasts
+        // // Set up an array to store the distances to the food objects detected by the raycasts
 
-        // Use multiple raycasts to detect food objects
-        RaycastHit hit;
-        for (int i = 0; i < numRaycasts; i++)
-        {
-            float angle = ((2 * i + 1 - numRaycasts) * angleBetweenRaycasts / 2);
-            // Rotate the direction of the raycast by the specified angle around the y-axis of the agent
-            Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.up);
-            Vector3 rayDirection = rotation * transform.forward * -1;
-            // Increase the starting point of the raycast by 0.1 units
-            Vector3 rayStart = transform.position + Vector3.up * 0.1f;
-            if (Physics.Raycast(rayStart, rayDirection, out hit, viewDistance))
-            {
-                // Draw a line representing the raycast in the scene view for debugging purposes
-                Debug.DrawRay(rayStart, rayDirection * hit.distance, Color.red);
-                if (hit.transform.gameObject.tag == "Food")
-                {
-                    // Use the length of the raycast as the distance to the food object
-                    distances[i] = hit.distance/viewDistance;
-                }
-                else
-                {
-                    // If no food object is detected, set the distance to the maximum length of the raycast
-                    distances[i] = 1;
-                }
-            }
-            else
-            {
-                // Draw a line representing the raycast in the scene view for debugging purposes
-                Debug.DrawRay(rayStart, rayDirection * viewDistance, Color.red);
-                // If no food object is detected, set the distance to the maximum length of the raycast
-                distances[i] = 1;
-            }
-        }
-
-        // Setup inputs for the neural network
-        float [] inputsToNN = distances;
-
-        // Get outputs from the neural network
-        float [] outputsFromNN = nn.Brain(inputsToNN);
-
-        //Store the outputs from the neural network in variables
-        FB = outputsFromNN[0];
-        LR = outputsFromNN[1];
-    
-        Debug.Log("FB: " + FB + " LR: " + LR);
-
-        // //if the agent is the user, use the inputs from the user instead of the neural network
-        // if (isUser)
+        // // Use multiple raycasts to detect food objects
+        // RaycastHit hit;
+        // for (int i = 0; i < numRaycasts; i++)
         // {
-        //     FB = Input.GetAxis("Vertical");
-        //     LR = Input.GetAxis("Horizontal")/10;
+        //     float angle = ((2 * i + 1 - numRaycasts) * angleBetweenRaycasts / 2);
+        //     // Rotate the direction of the raycast by the specified angle around the y-axis of the agent
+        //     Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.up);
+        //     Vector3 rayDirection = rotation * transform.forward * -1;
+        //     // Increase the starting point of the raycast by 0.1 units
+        //     Vector3 rayStart = transform.position + Vector3.up * 0.1f;
+        //     if (Physics.Raycast(rayStart, rayDirection, out hit, viewDistance))
+        //     {
+        //         // Draw a line representing the raycast in the scene view for debugging purposes
+        //         Debug.DrawRay(rayStart, rayDirection * hit.distance, Color.red);
+        //         if (hit.transform.gameObject.tag == "Food")
+        //         {
+        //             // Use the length of the raycast as the distance to the food object
+        //             distances[i] = hit.distance/viewDistance;
+        //         }
+        //         else
+        //         {
+        //             // If no food object is detected, set the distance to the maximum length of the raycast
+        //             distances[i] = 1;
+        //         }
+        //     }
+        //     else
+        //     {
+        //         // Draw a line representing the raycast in the scene view for debugging purposes
+        //         Debug.DrawRay(rayStart, rayDirection * viewDistance, Color.red);
+        //         // If no food object is detected, set the distance to the maximum length of the raycast
+        //         distances[i] = 1;
+        //     }
         // }
 
-        //Move the agent using the move function
+        // // Setup inputs for the neural network
+        // float [] inputsToNN = distances;
+
+        // // Get outputs from the neural network
+        // float [] outputsFromNN = nn.Brain(inputsToNN);
+
+        // //Store the outputs from the neural network in variables
+        // FB = outputsFromNN[0];
+        // LR = outputsFromNN[1];
+    
+        // // Debug.Log("FB: " + FB + " LR: " + LR);
+
+        // // //if the agent is the user, use the inputs from the user instead of the neural network
+        // // if (isUser)
+        // // {
+        // //     FB = Input.GetAxis("Vertical");
+        // //     LR = Input.GetAxis("Horizontal")/10;
+        // // }
+
+        // //Move the agent using the move function
+        // movement.Move(FB, LR);
+        float FB = Random.Range(-1.0f, 1.0f);
+        float LR = Random.Range(-1.0f, 1.0f);
         movement.Move(FB, LR);
     }
 

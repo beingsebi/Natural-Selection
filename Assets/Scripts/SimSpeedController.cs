@@ -16,10 +16,10 @@ public class SimSpeedController : MonoBehaviour
 
     void Update() {
         //if the space bar is pressed, change autoAdjust to the opposite of what it currently is
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            autoAdjust = !autoAdjust;
-        }
+        // if (Input.GetKeyDown(KeyCode.Space))
+        // {
+        //     autoAdjust = !autoAdjust;
+        // }
 
         //calculate fps for update not fixed update
         float fps = 1.0f / Time.unscaledDeltaTime;

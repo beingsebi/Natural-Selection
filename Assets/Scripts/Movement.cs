@@ -36,7 +36,7 @@ public class Movement : MonoBehaviour
         // Debug.Log("REAL-> FB: " + FB + " LR: " + LR);
 
 
-        Debug.Log("isDead: " + creature.isDead);
+        // Debug.Log("isDead: " + creature.isDead);
         //move the agent
         if (!creature.isDead)
         {
@@ -48,7 +48,7 @@ public class Movement : MonoBehaviour
             controller.SimpleMove(forward * speed * FB * -1);
         }
         // log if it is grounded or not
-        Debug.Log("Grounded: " + controller.isGrounded);
+        // Debug.Log("Grounded: " + controller.isGrounded);
         
         //Checks to see if the agent is grounded, if it is, don't apply gravity
         if (controller.isGrounded && playerVelocity.y < 0)

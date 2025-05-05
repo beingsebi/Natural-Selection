@@ -8,23 +8,29 @@ public class CreatureSpawner : MonoBehaviour
     private GameObject[] agentList;
     public int floorScale = 1;
 
-    // Update is called once per frame
-    void FixedUpdate()
+    public void StartSpawning(int spawnCount)
     {
-        agentList = GameObject.FindGameObjectsWithTag("Agent");
-
-        // if there are no agents in the scene, spawn one at a random location. 
-        // This is to ensure that there is always at least one agent in the scene.
-        if (agentList.Length < 1)
+        // Spawn a specified number of agents at random locations at the start of the game
+        for (int i = 0; i < spawnCount; i++)
         {
             SpawnCreature();
-        } 
+        }
     }
 
     void SpawnCreature()
     {
-        int x = Random.Range(0, 101)*floorScale;
-        int z = Random.Range(0, 101)*floorScale;
+        int x = Random.Range(-35, 35) * floorScale;
+        int z = Random.Range(-35, 35) * floorScale;
         Instantiate(agentPrefab, new Vector3((float)x, 0.75f, (float)z), Quaternion.identity);
+    }
+
+    public void RemoveSpawned()
+    {
+        agentList = GameObject.FindGameObjectsWithTag("Agent");
+        foreach (GameObject agent in agentList)
+        {
+            Destroy(agent);
+        }
+        Debug.Log("All agents destroyed.");
     }
 }
