@@ -3121,8 +3121,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2146dc1897b347446abe43bc6ce82c8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoAdjust: 1
-  gameSpeed: 1
 --- !u!4 &283236674
 Transform:
   m_ObjectHideFlags: 0
@@ -6424,9 +6422,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb96d0db4e110c649ad45e8e7ace0893, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnRate: 1
-  floorScale: 1
-  myPrefab: {fileID: 727493282953510873, guid: d053eebd6ed092849b54c1f4d193efd3, type: 3}
 --- !u!1001 &506130474
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14719,6 +14714,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31983d859a872f0ee92187e28d801f18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _settingsPanel: {fileID: 528765215}
   _speedText: {fileID: 150479659}
   _strengthText: {fileID: 1816314661}
   _senseText: {fileID: 738073921}
@@ -19744,8 +19740,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7d3edbb4ffdbe6438b4abe89e4333b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agentPrefab: {fileID: 7057441744910784723, guid: b9caf6f11ddf355438fe0a5afc4729b2, type: 3}
-  floorScale: 1
 --- !u!4 &1822539138
 Transform:
   m_ObjectHideFlags: 0
