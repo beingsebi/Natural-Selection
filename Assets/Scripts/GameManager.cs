@@ -101,7 +101,7 @@ public class GameManager : MonoBehaviour
                 }
             }
 
-            yield return new WaitForSeconds(energyPerEpoch);
+        yield return new WaitForSeconds(energyPerEpoch);
 
 
             foreach (GameObject agent in GameObject.FindGameObjectsWithTag("Agent"))
