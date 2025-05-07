@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class FoodSpawner : MonoBehaviour
 {
-    public float spawnRate = 10;
     public int floorScale = 1;
     public GameObject myPrefab;
 
@@ -20,7 +19,7 @@ public class FoodSpawner : MonoBehaviour
     {
         int x = Random.Range(-35, 35) * floorScale;
         int z = Random.Range(-35, 35) * floorScale;
-        Instantiate(myPrefab, new Vector3((float)x, 0.75f, (float)z), Quaternion.identity);
+        Instantiate(myPrefab, new Vector3((float)x, 1, (float)z), Quaternion.identity);
     }
 
     public void RemoveSpawned()
