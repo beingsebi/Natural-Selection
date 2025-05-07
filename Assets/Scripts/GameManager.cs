@@ -1,9 +1,11 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private GameObject _settingsPanel; // Assign the parent UI object here in the Inspector
 
     [SerializeField] private TextMeshProUGUI _speedText;
     [SerializeField] private TextMeshProUGUI _strengthText;
@@ -14,75 +16,130 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _energyPerEpochText;
     [SerializeField] private TextMeshProUGUI _populationPerEpochText;
 
-    [SerializeField] private FoodSpawner _foodSpawner; 
+    [SerializeField] private FoodSpawner _foodSpawner;
     [SerializeField] private CreatureSpawner _creatureSpawner; // reference to the creature spawner
-    [SerializeField] private float creatureCheckInterval = 0.6f; // interval to check for creatures
+    [SerializeField] private float creatureCheckInterval = 100.0f; // interval to check for creatures
+    private bool _isRunning = false; // flag to check if the simulation is running
 
     // [SerializeField] private SpawnManagerScript _spawnManager; // will use _spawnManager.spawnPoints
     // [SerializeField] private GameObject _playerPrefab;
-    
+
     public void EndGame()
     {
+        if (!_isRunning)
+        {
+            Debug.Log("Game is not running, cannot quit.");
+            return; // Exit if the game is not running
+        }
+
         Debug.Log("Game is quitting...");
+        CleanUp(); // Clean up before quitting
         Application.Quit();
     }
 
     public void StartSimulation()
     {
+        if (_isRunning)
+        {
+            Debug.Log("Simulation is already running.");
+            return; // Exit if the simulation is already running
+        }
+        _isRunning = true;
+        _settingsPanel.SetActive(false); // Hide the settings UI
+
         int speed = int.Parse(_speedText.text);
         int strength = int.Parse(_strengthText.text);
         int sense = int.Parse(_senseText.text);
 
         int epochs = int.Parse(_epochsText.text);
-        int mutationTemp = int.Parse(_mutationTempText.text);
+        float mutationTemp = float.Parse(_mutationTempText.text);
 
+        int populationPerEpoch = int.Parse(_populationPerEpochText.text);
         int populationPerEpoch = int.Parse(_populationPerEpochText.text);
         int foodPerEpoch = int.Parse(_foodPerEpochText.text);
         int energyPerEpoch = int.Parse(_energyPerEpochText.text);
 
-        Debug.Log($"Starting simulation with: Speed: {speed}, Strength: {strength}, Sense: {sense}, Epochs: {epochs}, Mutation Temp: {mutationTemp}, Population per Epoch: {populationPerEpoch}, Food per Epoch: {foodPerEpoch}, Energy per Epoch: {energyPerEpoch}");
-        for (int i = 0; i < epochs; i++)
+        if (_foodSpawner == null || _creatureSpawner == null)
         {
-            StartCoroutine(SimulateEpoch(populationPerEpoch, foodPerEpoch, mutationTemp));
-            // gather stats here 
+            Debug.LogError("Spawner reference(s) not set in GameManager!");
+            return;
         }
+        _creatureSpawner.initialSpeed = speed;
+        _creatureSpawner.initialViewDistance = sense;
+        _creatureSpawner.mutationTemp = mutationTemp;
+        // TODO add remaing characteristics
+
+        Debug.Log($"Starting simulation with: Speed: {speed}, Strength: {strength}, Sense: {sense}, Epochs: {epochs}, Mutation Temp: {mutationTemp}, Population per Epoch: {populationPerEpoch}, Food per Epoch: {foodPerEpoch}, Energy per Epoch: {energyPerEpoch}");
+        StartCoroutine(SimulateEpochs(epochs, populationPerEpoch, foodPerEpoch, energyPerEpoch));
+
         // save stats to disk
         // display stats 
         // add some menu for stats 
     }
-    
-    private IEnumerator SimulateEpoch(int populationPerEpoch, int foodPerEpoch, int mutationTemp)
+
+    // The creatures are spawned and when the epoch starts, the creatures are activated and move to the food
+    // The creatures reproduce if they have eaten more than 1 food
+    // The creatures die if they have eaten no food
+    // The creatures reproduce if they have eaten more than 1 food
+    private IEnumerator SimulateEpochs(int epochs, int populationPerEpoch, int foodPerEpoch, int energyPerEpoch)
     {
-        // Ensure references are set
-        if (_foodSpawner == null || _creatureSpawner == null)
+        for (int i = 0; i < populationPerEpoch; i++)
         {
-            Debug.LogError("Spawner reference(s) not set in GameManager!");
-            yield break; // Exit the coroutine
+            _creatureSpawner.SpawnCreature();
         }
 
-        // Start spawning food and creatures
-        _foodSpawner.StartSpawning(foodPerEpoch);
-        _creatureSpawner.StartSpawning(populationPerEpoch); 
-
-        // --- Wait for creatures to be "dead" ---
-        Debug.Log("Epoch running, waiting for creatures to die...");
-        // Check if creatures exist initially before starting the loop
-        bool creaturesExist = GameObject.FindGameObjectsWithTag("Agent").Length > 0;
-
-        while (creaturesExist)
+        for (int i = 0; i < epochs; i++)
         {
-            Debug.Log("Creatures are still alive, waiting...");
-            // Wait for the specified interval before checking again
-            yield return new WaitForSeconds(creatureCheckInterval); 
+            _foodSpawner.StartSpawning(foodPerEpoch);
+            foreach (GameObject agent in GameObject.FindGameObjectsWithTag("Agent"))
+            {
+                if (agent.TryGetComponent<Creature>(out var creature))
+                {
+                    creature.StartEpoch();
+                }
+                else
+                {
+                    Debug.LogError("Creature component not found on agent!");
+                }
+            }
 
-            // Check if any agents are left
-            creaturesExist = GameObject.FindGameObjectsWithTag("Agent").Length > 0;
+            yield return new WaitForSeconds(energyPerEpoch);
+
+
+            foreach (GameObject agent in GameObject.FindGameObjectsWithTag("Agent"))
+            {
+                if (agent.TryGetComponent<Creature>(out var creature))
+                {
+                    creature.EndEpoch();
+                }
+                else
+                {
+                    Debug.LogError("Creature component not found on agent!");
+                }
+            }
+            int creaturesRemaining = GameObject.FindGameObjectsWithTag("Agent").Length;
+            Debug.Log($"Epoch {i + 1}: Creatures remaining: {creaturesRemaining}");
+            _foodSpawner.RemoveSpawned();
+
+            if (creaturesRemaining == 0)
+            {
+                Debug.Log("Epoch finished: No creatures remaining.");
+                break;
+            }
         }
-        Debug.Log("All creatures are dead.");
-        // --- End Wait ---
-        
-        // Stop spawners and clean up
-        _foodSpawner.RemoveSpawned(); 
-        _creatureSpawner.RemoveSpawned(); 
+
+        CleanUp();
+    }
+
+    private void CleanUp()
+    {
+        _foodSpawner.RemoveSpawned();
+        _creatureSpawner.RemoveSpawned();
+        _isRunning = false;
+
+        if (_settingsPanel != null)
+        {
+            _settingsPanel.SetActive(true); // Show the settings UI again
+        }
     }
 }

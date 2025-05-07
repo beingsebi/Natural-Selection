@@ -3070,6 +3070,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3121,7 +3122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2146dc1897b347446abe43bc6ce82c8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoAdjust: 1
+  autoAdjust: 0
   gameSpeed: 1
 --- !u!4 &283236674
 Transform:
@@ -3343,7 +3344,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 20
+  m_text: 0.2
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
@@ -5747,7 +5748,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1
+  m_text: 2
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
@@ -6380,6 +6381,53 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4686945877643419940, guid: 2570c92eaa99aa3b2b636c1c12949286, type: 3}
   m_PrefabInstance: {fileID: 486348775}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &505008535
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 505008536}
+  - component: {fileID: 505008537}
+  m_Layer: 0
+  m_Name: Food Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &505008536
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 505008535}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 16.433187, y: 11.990579, z: -20.920355}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &505008537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 505008535}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb96d0db4e110c649ad45e8e7ace0893, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnRate: 1
+  floorScale: 1
+  myPrefab: {fileID: 727493282953510873, guid: d053eebd6ed092849b54c1f4d193efd3, type: 3}
 --- !u!1 &505008535
 GameObject:
   m_ObjectHideFlags: 0
@@ -9720,9 +9768,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1971498397}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 200
-  m_WholeNumbers: 1
-  m_Value: 20
+  m_MaxValue: 1
+  m_WholeNumbers: 0
+  m_Value: 0.2
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -9829,6 +9877,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 100, y: 1, z: 100}
   m_LocalScale: {x: 100, y: 1, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10392,7 +10441,10 @@ MonoBehaviour:
   m_Direction: 0
   m_MinValue: 1
   m_MaxValue: 50
+  m_MinValue: 1
+  m_MaxValue: 50
   m_WholeNumbers: 1
+  m_Value: 5
   m_Value: 5
   m_OnValueChanged:
     m_PersistentCalls:
@@ -13630,10 +13682,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 1826833940}
   m_HandleRect: {fileID: 1989867252}
   m_Direction: 0
-  m_MinValue: 1000
-  m_MaxValue: 20000
+  m_MinValue: 5
+  m_MaxValue: 60
   m_WholeNumbers: 1
-  m_Value: 3000
+  m_Value: 6
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -14719,6 +14771,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31983d859a872f0ee92187e28d801f18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _settingsPanel: {fileID: 391191843}
   _speedText: {fileID: 150479659}
   _strengthText: {fileID: 1816314661}
   _senseText: {fileID: 738073921}
@@ -14726,6 +14779,10 @@ MonoBehaviour:
   _mutationTempText: {fileID: 298616400}
   _foodPerEpochText: {fileID: 1737276549}
   _energyPerEpochText: {fileID: 1806360830}
+  _populationPerEpochText: {fileID: 1533918412}
+  _foodSpawner: {fileID: 505008537}
+  _creatureSpawner: {fileID: 1822539137}
+  creatureCheckInterval: 0.1
   _populationPerEpochText: {fileID: 1533918412}
   _foodSpawner: {fileID: 505008537}
   _creatureSpawner: {fileID: 1822539137}
@@ -16615,7 +16672,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 30
+  m_text: 2
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
@@ -19258,7 +19315,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 3000
+  m_text: 10
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
@@ -19739,7 +19796,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1822539136}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b7d3edbb4ffdbe6438b4abe89e4333b8, type: 3}
   m_Name: 
@@ -19920,6 +19977,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1842386216}
   - component: {fileID: 1842386217}
+  - component: {fileID: 1842386217}
   m_Layer: 0
   m_Name: Trees
   m_TagString: Untagged
@@ -19936,6 +19994,7 @@ Transform:
   m_GameObject: {fileID: 1842386215}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -19960,6 +20019,33 @@ Transform:
   - {fileID: 338847930}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &1842386217
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1842386215}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!54 &1842386217
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -22872,6 +22958,9 @@ SceneRoots:
   - {fileID: 1842386216}
   - {fileID: 696998973}
   - {fileID: 448314168}
+  - {fileID: 505008536}
+  - {fileID: 1822539138}
+  - {fileID: 283236674}
   - {fileID: 505008536}
   - {fileID: 1822539138}
   - {fileID: 283236674}
