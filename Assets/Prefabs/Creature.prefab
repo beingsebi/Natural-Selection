@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7216550379676721233}
   - component: {fileID: 7060995059904303348}
   - component: {fileID: 5672111475709388432}
+  - component: {fileID: 39324466123136503}
   m_Layer: 0
   m_Name: Creature
   m_TagString: Agent
@@ -50,11 +51,12 @@ MonoBehaviour:
   controller: {fileID: 5672111475709388432}
   isActive: 0
   foodCount: 0
-  mutationRate: 0.5
-  mutationStrength: 0.1
+  mutationTemp: 0.5
+  mutationChange: 0.1
   viewDistance: 5
   size: 1
   speed: 10
+  eatThreshold: 1.2
   hasFoodInRange: 0
 --- !u!143 &5672111475709388432
 CharacterController:
@@ -81,6 +83,27 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &39324466123136503
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6739497519825242889}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7382993162417784596
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,7 +115,6 @@ GameObject:
   - component: {fileID: 1738964231507605787}
   - component: {fileID: 1975170158764910293}
   - component: {fileID: 7844739015586608691}
-  - component: {fileID: 1811096738870695900}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -168,24 +190,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1811096738870695900
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7382993162417784596}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}

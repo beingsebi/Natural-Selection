@@ -7,11 +7,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _settingsPanel; // Assign the parent UI object here in the Inspector
 
     [SerializeField] private TextMeshProUGUI _speedText;
-    [SerializeField] private TextMeshProUGUI _strengthText;
+    [SerializeField] private TextMeshProUGUI _sizeText;
     [SerializeField] private TextMeshProUGUI _senseText;
     [SerializeField] private TextMeshProUGUI _epochsText;
     [SerializeField] private TextMeshProUGUI _mutationTempText;
     [SerializeField] private TextMeshProUGUI _foodPerEpochText;
+    [SerializeField] private TextMeshProUGUI _mutationChangeText;
     [SerializeField] private TextMeshProUGUI _energyPerEpochText;
     [SerializeField] private TextMeshProUGUI _populationPerEpochText;
 
@@ -47,11 +48,12 @@ public class GameManager : MonoBehaviour
         _settingsPanel.SetActive(false); // Hide the settings UI
 
         int speed = int.Parse(_speedText.text);
-        int strength = int.Parse(_strengthText.text);
+        float size = float.Parse(_sizeText.text);
         int sense = int.Parse(_senseText.text);
 
         int epochs = int.Parse(_epochsText.text);
         float mutationTemp = float.Parse(_mutationTempText.text);
+        float mutationChange = float.Parse(_mutationChangeText.text);
 
         int populationPerEpoch = int.Parse(_populationPerEpochText.text);
         int foodPerEpoch = int.Parse(_foodPerEpochText.text);
@@ -65,9 +67,11 @@ public class GameManager : MonoBehaviour
         _creatureSpawner.initialSpeed = speed;
         _creatureSpawner.initialViewDistance = sense;
         _creatureSpawner.mutationTemp = mutationTemp;
+        _creatureSpawner.initialSize = size;
+        _creatureSpawner.mutationChange = mutationChange;
         // TODO add remaing characteristics
 
-        Debug.Log($"Starting simulation with: Speed: {speed}, Strength: {strength}, Sense: {sense}, Epochs: {epochs}, Mutation Temp: {mutationTemp}, Population per Epoch: {populationPerEpoch}, Food per Epoch: {foodPerEpoch}, Energy per Epoch: {energyPerEpoch}");
+        Debug.Log($"Starting simulation with: Speed: {speed}, Size: {size}, Sense: {sense}, Epochs: {epochs}, Mutation Temp: {mutationTemp}, Population per Epoch: {populationPerEpoch}, Food per Epoch: {foodPerEpoch}, Energy per Epoch: {energyPerEpoch}");
         StartCoroutine(SimulateEpochs(epochs, populationPerEpoch, foodPerEpoch, energyPerEpoch));
 
         // save stats to disk
@@ -101,7 +105,7 @@ public class GameManager : MonoBehaviour
                 }
             }
 
-        yield return new WaitForSeconds(energyPerEpoch);
+            yield return new WaitForSeconds(energyPerEpoch);
 
 
             foreach (GameObject agent in GameObject.FindGameObjectsWithTag("Agent"))

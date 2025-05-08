@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Creature : MonoBehaviour
@@ -8,14 +10,16 @@ public class Creature : MonoBehaviour
     public CharacterController controller;
     public bool isActive = false;
     public int foodCount = 0;
-    public float mutationRate = 0.5f; // Chance of mutation
-    public float mutationStrength = 0.1f; // How much genes can change on a single mutation
+    public float mutationTemp = 0.5f; // Chance of mutation
+    public float mutationChange = 0.1f; // How much genes can change on a single mutation
 
     // Genes that can be mutated
     public float viewDistance = 5;
     public float size = 1.0f;
     public float speed = 10f;
     // End of genes
+
+    public float eatThreshold = 1.5f;
 
     public bool hasFoodInRange = false;
 
@@ -26,6 +30,14 @@ public class Creature : MonoBehaviour
         controller = GetComponent<CharacterController>();
         this.name = "Agent";
         foodCount = 0;
+
+        speed = MutateGene(speed);
+        // Clamp size between 1 and 2
+        size = Mathf.Clamp(MutateGene(size), 1f, 2f);
+        viewDistance = MutateGene(viewDistance);
+
+        // Adjust the size of the creature
+        transform.localScale = new Vector3(size, size, size);
     }
 
     // Update is called once per frame
@@ -48,7 +60,18 @@ public class Creature : MonoBehaviour
 
             directionToFood.Normalize();
             transform.forward = directionToFood;
-            controller.Move(transform.forward * speed * Time.deltaTime);
+
+            // Create movement vector with no vertical component
+            Vector3 moveDirection = transform.forward * speed * Time.deltaTime;
+            moveDirection.y = 0;
+
+            // Apply movement
+            controller.Move(moveDirection);
+
+            // Force Y position to ground level
+            Vector3 pos = transform.position;
+            pos.y = 1 + size / 3;
+            transform.position = pos;
         }
         else
         {
@@ -64,12 +87,19 @@ public class Creature : MonoBehaviour
             }
 
             // If no food is found, move randomly but stay within bounds
-            transform.Rotate(Vector3.up, Random.Range(0, 90) * Time.deltaTime);
-            controller.Move(transform.forward * speed * Time.deltaTime);
+            transform.Rotate(Vector3.up, UnityEngine.Random.Range(0, 90) * Time.deltaTime);
 
-            // Clamp position to boundaries
+            // Create movement vector with no vertical component
+            Vector3 moveDirection = transform.forward * speed * Time.deltaTime;
+            moveDirection.y = 0;
+
+            // Apply movement
+            controller.Move(moveDirection);
+
+            // Clamp position to boundaries and ground level
             Vector3 pos = transform.position;
             pos.x = Mathf.Clamp(pos.x, -35f, 35f);
+            pos.y = 1 + size / 3;
             pos.z = Mathf.Clamp(pos.z, -35f, 35f);
             transform.position = pos;
         }
@@ -83,6 +113,20 @@ public class Creature : MonoBehaviour
         {
             foodCount = foodCount + 1;
             Destroy(col.gameObject);
+
+        }
+
+
+        if (col.gameObject.CompareTag("Agent"))
+        {
+            float otherSize = Mathf.Round(col.gameObject.GetComponent<Creature>().size * 1000f) / 1000f;
+            float thresholdSize = Mathf.Round(size * 1000f) / 1000f;
+            if (otherSize * eatThreshold < thresholdSize)
+            {
+                foodCount = foodCount + 1;
+                Destroy(col.gameObject);
+                Debug.Log("Eaten a smaller creature");
+            }
         }
     }
     GameObject FindClosestFood()
@@ -104,6 +148,18 @@ public class Creature : MonoBehaviour
                     closestFood = col.gameObject;
                 }
             }
+            if (col.gameObject.CompareTag("Agent"))
+            {
+                if (col.gameObject.GetComponent<Creature>().size * eatThreshold < size)
+                {
+                    float distance = Vector3.Distance(transform.position, col.transform.position);
+                    if (distance < minDistance)
+                    {
+                        minDistance = distance;
+                        closestFood = col.gameObject;
+                    }
+                }
+            }
         }
         return closestFood;
     }
@@ -117,7 +173,7 @@ public class Creature : MonoBehaviour
     public void EndEpoch()
     {
         isActive = false;
-        Debug.Log("Food count: " + foodCount);
+        // Debug.Log("Food count: " + foodCount);
         if (foodCount <= 0)
         {
             Destroy(gameObject); // Destroy the creature if it has eaten food
@@ -132,7 +188,7 @@ public class Creature : MonoBehaviour
         {
             // Add random offset to spawn position
             Vector3 spawnOffset = new Vector3(
-                Random.Range(-3f, 3f),
+                UnityEngine.Random.Range(-5f, 5f),
                 0,
                 0
             );
@@ -141,20 +197,15 @@ public class Creature : MonoBehaviour
             GameObject newCreature = Instantiate(agentPrefab, spawnPosition, Quaternion.identity);
             Creature childCreature = newCreature.GetComponent<Creature>();
 
-            // Copy and mutate genes
-            childCreature.speed = MutateGene(speed);
-            // childCreature.size = MutateGene(size);
-            childCreature.viewDistance = MutateGene(viewDistance);
-
             childCreature.isActive = true;
         }
     }
 
     float MutateGene(float gene)
     {
-        if (Random.value < mutationRate)
+        if (UnityEngine.Random.value < mutationTemp)
         {
-            float mutation = Random.Range(-mutationStrength, mutationStrength);
+            float mutation = UnityEngine.Random.Range(-mutationChange, mutationChange);
             return Mathf.Max(0.1f, gene * (1 + mutation)); // Ensure values don't go below 0.1
         }
         return gene;
