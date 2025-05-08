@@ -132,7 +132,7 @@ public class Creature : MonoBehaviour
         {
             // Add random offset to spawn position
             Vector3 spawnOffset = new Vector3(
-                Random.Range(-2f, 2f),
+                Random.Range(-3f, 3f),
                 0,
                 0
             );
