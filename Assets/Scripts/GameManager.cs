@@ -107,59 +107,55 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < epochs; i++)
         {
             _foodSpawner.StartSpawning(foodPerEpoch);
-            EpochStats currentStats = new EpochStats
-            {
-                epochNumber = i + 1,
-                startedCount = GameObject.FindGameObjectsWithTag("Agent").Length
-            };
-            allEpochStats.Add(currentStats);
 
-            foreach (GameObject agent in GameObject.FindGameObjectsWithTag("Agent"))
+            GameObject[] agents = GameObject.FindGameObjectsWithTag("Agent");
+            EpochStats stats = new EpochStats { epochNumber = i + 1 };
+
+
+            foreach (GameObject agent in agents)
             {
-                if (agent.TryGetComponent<Creature>(out var creature))
+                if (agent.TryGetComponent<Creature>(out var creature) && !creature.shouldBeDestroyed)
                 {
+                    stats.startedCount++;
+                    // Count also the children that will be born during this epoch
+                    if (creature.foodCount > 0)
+                    {
+                        stats.startedCount += creature.foodCount - 1;
+                    }
                     creature.StartEpoch();
-                }
-                else
-                {
-                    Debug.LogError("Creature component not found on agent!");
                 }
             }
 
             yield return new WaitForSeconds(energyPerEpoch);
 
-
+            List<GameObject> creaturesToDestroy = new List<GameObject>();
             foreach (GameObject agent in GameObject.FindGameObjectsWithTag("Agent"))
             {
                 if (agent.TryGetComponent<Creature>(out var creature))
                 {
                     creature.EndEpoch();
-                }
-                else
-                {
-                    Debug.LogError("Creature component not found on agent!");
+                    if (creature.shouldBeDestroyed)
+                    {
+                        creaturesToDestroy.Add(agent);
+                        stats.diedCount++;
+                    }
                 }
             }
-            int currentSurvivors = 0;
 
-            foreach (GameObject agent in GameObject.FindGameObjectsWithTag("Agent"))
+            // Destroy the creatures that have eaten no food
+            foreach (GameObject creature in creaturesToDestroy)
             {
-                if (agent.TryGetComponent<Creature>(out var c))
-                {
-                    if (c.foodCount > 0)
-                        currentSurvivors++;
-                }
+                Destroy(creature);
             }
 
-            EpochStats stats = allEpochStats[allEpochStats.Count - 1];
-            stats.survivedCount = currentSurvivors;
-            stats.diedCount = stats.startedCount - currentSurvivors;
-
-
-            int creaturesRemaining = GameObject.FindGameObjectsWithTag("Agent").Length;
+            int creaturesRemaining = stats.startedCount - stats.diedCount;
             Debug.Log($"Epoch {i + 1}: Creatures remaining: {creaturesRemaining}");
             _foodSpawner.RemoveSpawned();
 
+            stats.survivedCount = creaturesRemaining;
+            allEpochStats.Add(stats);
+
+            // If there are no creatures remaining, break the loop
             if (creaturesRemaining == 0)
             {
                 Debug.Log("Epoch finished: No creatures remaining.");

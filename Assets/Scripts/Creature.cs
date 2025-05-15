@@ -23,6 +23,7 @@ public class Creature : MonoBehaviour
 
     public bool hasFoodInRange = false;
 
+    public bool shouldBeDestroyed = false;
 
     // Start is called before the first frame update
     void Awake()
@@ -62,7 +63,7 @@ public class Creature : MonoBehaviour
             transform.forward = directionToFood;
 
             double logBase1_5 = Math.Log(size) / Math.Log(1.5);
-        
+
             // Compute the final value
             double result = 1.0 / (1.0 + logBase1_5);
             // Create movement vector with no vertical component
@@ -94,7 +95,7 @@ public class Creature : MonoBehaviour
             transform.Rotate(Vector3.up, UnityEngine.Random.Range(0, 90) * Time.deltaTime);
 
             double logBase1_5 = Math.Log(size) / Math.Log(1.5);
-        
+
             // Compute the final value
             double result = 1.0 / (1.0 + logBase1_5);
             // Create movement vector with no vertical component
@@ -133,7 +134,7 @@ public class Creature : MonoBehaviour
             {
                 foodCount = foodCount + 1;
                 Destroy(col.gameObject);
-                Debug.Log("Eaten a smaller creature");
+                // Debug.Log("Eaten a smaller creature");
             }
         }
     }
@@ -181,10 +182,9 @@ public class Creature : MonoBehaviour
     public void EndEpoch()
     {
         isActive = false;
-        // Debug.Log("Food count: " + foodCount);
         if (foodCount <= 0)
         {
-            Destroy(gameObject); // Destroy the creature if it has eaten food
+            shouldBeDestroyed = true;
         }
         foodCount -= 1;
     }
