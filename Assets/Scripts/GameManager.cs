@@ -1,6 +1,16 @@
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 using System.Collections;
+using System.Collections.Generic;
+
+[System.Serializable]
+public class EpochStats
+{
+    public int epochNumber;
+    public int startedCount;
+    public int diedCount;
+    public int survivedCount;
+}
 
 public class GameManager : MonoBehaviour
 {
@@ -15,11 +25,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _mutationChangeText;
     [SerializeField] private TextMeshProUGUI _energyPerEpochText;
     [SerializeField] private TextMeshProUGUI _populationPerEpochText;
+    [SerializeField] private GameObject statLinePrefab;
+    [SerializeField] private Transform statContentParent;
+    [SerializeField] private GameObject statPanel;
+
 
     [SerializeField] private FoodSpawner _foodSpawner;
     [SerializeField] private CreatureSpawner _creatureSpawner; // reference to the creature spawner
     [SerializeField] private float creatureCheckInterval = 100.0f; // interval to check for creatures
     private bool _isRunning = false; // flag to check if the simulation is running
+    private List<EpochStats> allEpochStats = new List<EpochStats>();
 
     // [SerializeField] private SpawnManagerScript _spawnManager; // will use _spawnManager.spawnPoints
     // [SerializeField] private GameObject _playerPrefab;
@@ -85,14 +100,20 @@ public class GameManager : MonoBehaviour
     // The creatures reproduce if they have eaten more than 1 food
     private IEnumerator SimulateEpochs(int epochs, int populationPerEpoch, int foodPerEpoch, int energyPerEpoch)
     {
-        for (int i = 0; i < populationPerEpoch; i++)
-        {
-            _creatureSpawner.SpawnCreature();
-        }
+        _creatureSpawner.SpawnPopulation(populationPerEpoch);
+        yield return null;
+
 
         for (int i = 0; i < epochs; i++)
         {
             _foodSpawner.StartSpawning(foodPerEpoch);
+            EpochStats currentStats = new EpochStats
+            {
+                epochNumber = i + 1,
+                startedCount = GameObject.FindGameObjectsWithTag("Agent").Length
+            };
+            allEpochStats.Add(currentStats);
+
             foreach (GameObject agent in GameObject.FindGameObjectsWithTag("Agent"))
             {
                 if (agent.TryGetComponent<Creature>(out var creature))
@@ -119,6 +140,22 @@ public class GameManager : MonoBehaviour
                     Debug.LogError("Creature component not found on agent!");
                 }
             }
+            int currentSurvivors = 0;
+
+            foreach (GameObject agent in GameObject.FindGameObjectsWithTag("Agent"))
+            {
+                if (agent.TryGetComponent<Creature>(out var c))
+                {
+                    if (c.foodCount > 0)
+                        currentSurvivors++;
+                }
+            }
+
+            EpochStats stats = allEpochStats[allEpochStats.Count - 1];
+            stats.survivedCount = currentSurvivors;
+            stats.diedCount = stats.startedCount - currentSurvivors;
+
+
             int creaturesRemaining = GameObject.FindGameObjectsWithTag("Agent").Length;
             Debug.Log($"Epoch {i + 1}: Creatures remaining: {creaturesRemaining}");
             _foodSpawner.RemoveSpawned();
@@ -130,6 +167,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        ShowEpochStats();
         CleanUp();
     }
 
@@ -144,4 +182,34 @@ public class GameManager : MonoBehaviour
             _settingsPanel.SetActive(true); // Show the settings UI again
         }
     }
+    private void ShowEpochStats()
+    {
+        statPanel.SetActive(true); // Afișează scroll-ul
+
+        foreach (EpochStats stats in allEpochStats)
+        {
+            GameObject line = Instantiate(statLinePrefab, statContentParent);
+            TMP_Text text = line.GetComponent<TMP_Text>();
+            text.text = $"Epoch {stats.epochNumber}: Start = {stats.startedCount}, Died = {stats.diedCount}, Survived = {stats.survivedCount}";
+        }
+    }
+    public void ReturnToMenu()
+    {
+        // Ascunde panoul cu statistici
+        statPanel.SetActive(false);
+
+        // Reafișează meniul cu slider-ele
+        _settingsPanel.SetActive(true);
+
+        // Șterge statisticile salvate (pregătire pentru o nouă simulare)
+        allEpochStats.Clear();
+
+        // (Opțional) Șterge vizual toate liniile din scroll
+        foreach (Transform child in statContentParent)
+        {
+            Destroy(child.gameObject);
+        }
+    }
+
+
 }
