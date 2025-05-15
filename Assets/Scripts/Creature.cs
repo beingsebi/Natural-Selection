@@ -61,8 +61,12 @@ public class Creature : MonoBehaviour
             directionToFood.Normalize();
             transform.forward = directionToFood;
 
+            double logBase1_5 = Math.Log(size) / Math.Log(1.5);
+        
+            // Compute the final value
+            double result = 1.0 / (1.0 + logBase1_5);
             // Create movement vector with no vertical component
-            Vector3 moveDirection = transform.forward * speed * Time.deltaTime;
+            Vector3 moveDirection = transform.forward * speed * (float)result * Time.deltaTime;
             moveDirection.y = 0;
 
             // Apply movement
@@ -89,8 +93,12 @@ public class Creature : MonoBehaviour
             // If no food is found, move randomly but stay within bounds
             transform.Rotate(Vector3.up, UnityEngine.Random.Range(0, 90) * Time.deltaTime);
 
+            double logBase1_5 = Math.Log(size) / Math.Log(1.5);
+        
+            // Compute the final value
+            double result = 1.0 / (1.0 + logBase1_5);
             // Create movement vector with no vertical component
-            Vector3 moveDirection = transform.forward * speed * Time.deltaTime;
+            Vector3 moveDirection = transform.forward * speed * (float)result * Time.deltaTime;
             moveDirection.y = 0;
 
             // Apply movement
