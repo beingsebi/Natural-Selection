@@ -1,0 +1,53 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Nicolle Dumitrescu\\OneDrive\\Desktop\\PAS\\Natural-Selection\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{3A7A26EF-4266-AB5A-E551-9E5B0AFF9013}|Assembly-CSharp.csproj|c:\\users\\nicolle dumitrescu\\onedrive\\desktop\\pas\\natural-selection\\assets\\scripts\\foodspawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A7A26EF-4266-AB5A-E551-9E5B0AFF9013}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\foodspawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A7A26EF-4266-AB5A-E551-9E5B0AFF9013}|Assembly-CSharp.csproj|C:\\Users\\Nicolle Dumitrescu\\OneDrive\\Desktop\\PAS\\Natural-Selection\\assets\\scripts\\creaturespawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A7A26EF-4266-AB5A-E551-9E5B0AFF9013}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\creaturespawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CreatureSpawner.cs",
+              "DocumentMoniker": "C:\\Users\\Nicolle Dumitrescu\\OneDrive\\Desktop\\PAS\\Natural-Selection\\Assets\\Scripts\\CreatureSpawner.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\CreatureSpawner.cs",
+              "ToolTip": "C:\\Users\\Nicolle Dumitrescu\\OneDrive\\Desktop\\PAS\\Natural-Selection\\Assets\\Scripts\\CreatureSpawner.cs",
+              "RelativeToolTip": "Assets\\Scripts\\CreatureSpawner.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-13T15:01:48.252Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "FoodSpawner.cs",
+              "DocumentMoniker": "C:\\Users\\Nicolle Dumitrescu\\OneDrive\\Desktop\\PAS\\Natural-Selection\\Assets\\Scripts\\FoodSpawner.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\FoodSpawner.cs",
+              "ToolTip": "C:\\Users\\Nicolle Dumitrescu\\OneDrive\\Desktop\\PAS\\Natural-Selection\\Assets\\Scripts\\FoodSpawner.cs",
+              "RelativeToolTip": "Assets\\Scripts\\FoodSpawner.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-13T15:00:00.719Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
